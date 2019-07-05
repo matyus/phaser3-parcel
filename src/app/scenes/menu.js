@@ -1,21 +1,35 @@
 import { Scene } from 'phaser';
 
+const fontStyles = {
+  color: '#000000',
+  fontFamily: 'monospace'
+};
+
 export default class Menu extends Scene {
-  constructor () {
+  constructor (data) {
+    console.log('constructor', data);
+
     super({
       key: 'menu'
     });
+
+  }
+
+  init (data) {
+    console.log('init menu', data);
+    this.previousScore = data.previousScore;
   }
 
   preload () {
-    this.load.image('background', require('../assets/background.png'));
+    console.log('preload menu');
   }
 
   create () {
-    this.add.image(0, 0, 'background').setOrigin(0, 0);
-    this.add.text(50, 50, 'Hello world!', { fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' }).setOrigin(0, 0);
-    this.add.text(50, 100, 'Hello world!', { fontFamily: 'Courier New' }).setOrigin(0, 0);
-    this.add.text(50, 150, 'Hello world!', { fontFamily: 'monospace' }).setOrigin(0, 0);
+    console.log('create menu');
+    this.add.text(10, 10, 'Press any key to start', fontStyles).setOrigin(0, 0);
+    if (this.previousScore) {
+      this.add.text(10, 30, `Previous score ${this.previousScore}`, fontStyles).setOrigin(0, 0);
+    }
 
     this.input.keyboard.on('keyup', () => {
       this.scene.start('level');
