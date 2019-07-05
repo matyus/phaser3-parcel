@@ -154,11 +154,7 @@ init (data) {
   this.foo = data.foo;
   this.bar = data.bar;
 }
-```\
-
-
-
-
+```
 
 ## Resources
 
